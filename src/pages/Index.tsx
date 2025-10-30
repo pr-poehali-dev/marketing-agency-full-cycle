@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -86,8 +87,63 @@ const Index = () => {
             <a href="#cases" className="hover:text-primary transition-colors">Кейсы</a>
             <a href="#contact" className="hover:text-primary transition-colors">Контакты</a>
           </div>
-          <Button size="sm">Оставить заявку</Button>
+          <div className="hidden md:block">
+            <Button size="sm">Оставить заявку</Button>
+          </div>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <Icon name={isMenuOpen ? 'X' : 'Menu'} size={24} />
+          </Button>
         </div>
+        
+        {isMenuOpen && (
+          <div className="md:hidden bg-background border-t border-border">
+            <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
+              <a 
+                href="#services" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Услуги
+              </a>
+              <a 
+                href="#workflow" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Методология
+              </a>
+              <a 
+                href="#team" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Команда
+              </a>
+              <a 
+                href="#cases" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Кейсы
+              </a>
+              <a 
+                href="#contact" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Контакты
+              </a>
+              <Button className="mt-2" onClick={() => setIsMenuOpen(false)}>
+                Оставить заявку
+              </Button>
+            </div>
+          </div>
+        )}
       </nav>
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
